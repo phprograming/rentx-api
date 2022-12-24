@@ -6,10 +6,10 @@ class CreateCategoryController {
 
     constructor(private CreateCategoryUseCase: CreateCategoryUseCase) {}
 
-    handle(req: Request, res: Response): Response {
+    async handle(req: Request, res: Response): Promise<Response> {
         const { name, description } = req.body;
 
-        this.CreateCategoryUseCase.execute({ name, description });
+        await this.CreateCategoryUseCase.execute({ name, description });
         
         return res.status(201).send();
     }
