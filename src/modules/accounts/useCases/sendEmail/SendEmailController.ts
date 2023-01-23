@@ -7,7 +7,7 @@ class SendEmailController {
     async handle(req: Request, res: Response): Promise<Response> {
         const { email } = req.body;
 
-        const sendEmailUseCase = container.resolve(SendEmailUseCase)
+        const sendEmailUseCase = container.resolve(SendEmailUseCase);
 
         await sendEmailUseCase.execute(email);
         

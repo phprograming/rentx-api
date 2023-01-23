@@ -20,7 +20,7 @@ describe("List Category Controller", () => {
 
         await connection.query(
             `INSERT INTO USERS (id, name, email, password, "isAdmin", created_at, driver_license)
-            VALUES('${id}', 'admin', 'admin@email.com', '${password}', true, 'now()', 123)
+            VALUES('${id}', 'admin', 'admin@rentx.com.br', '${password}', true, 'now()', 123)
             `
         );
     });
@@ -33,11 +33,11 @@ describe("List Category Controller", () => {
     it("should be able to list all categories", async () => {
         const responseToken = await request(app).post("/sessions")
         .send({
-            email: "admin@email.com",
+            email: "admin@rentx.com.br",
             password: "admin",
         });
 
-        const { token } = responseToken.body;
+        const { refresh_token } = responseToken.body;
 
         await request(app)
         .post("/categories")
@@ -45,7 +45,7 @@ describe("List Category Controller", () => {
             name: "Category Supertest",
             description: "Category Supertest",
         }).set({
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${refresh_token}`
         });
 
         const response = await request(app).get("/categories");
