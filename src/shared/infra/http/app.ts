@@ -15,10 +15,13 @@ import swaggerFile from '../../../swagger.json';
 
 import { AppError } from '@shared/errors/AppError';
 
+import rateLimiter from "./middlewares/rateLimiter";
 
 createConnection();
 
 const app = express();
+
+app.use(rateLimiter);
 
 app.use(express.json());
 
